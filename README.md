@@ -1,1 +1,1 @@
-# thortful_app
+# My Store App
