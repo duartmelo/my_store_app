@@ -1,0 +1,7 @@
+@if (notificationSubject$ | async; as notification) {
+  <div class="h-10 absolute top-2 right-5 z-50">
+    <ngb-toast [animation]="true" [header]="notification.title" [classList]="notification.class" [autohide]="notification.type !== 'danger'" (hidden)="notificationSubject$.next(undefined)">
+      {{notification.message}}
+    </ngb-toast>
+  </div>
+}

@@ -7,7 +7,7 @@ import { LoginInterface } from '@interfaces/Login.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class AutenticationService {
+export class AuthenticationService {
 
   constructor(private httpClient: HttpClient) { }
 

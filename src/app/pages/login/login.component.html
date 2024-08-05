@@ -39,7 +39,7 @@
           </div>
         } @else {
           <input type="submit" [value]="'Log In'" class="text-lg w-full md:w-5/6 h-12 rounded-2xl font-bold"
-          [ngClass]="{'bg-gray-500 text-gray-300': isInvalid, 'bg-[#ed4c34] text-white': !isInvalid}"
+          [ngClass]="{'bg-gray-500 text-gray-300': isInvalid, 'bg-orange-550 bg-orange text-white': !isInvalid}"
           [disabled]="isInvalid">
         }
       </div>

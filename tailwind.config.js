@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundColor: {
+        "orange-550": "#ed4c34"
+      },
       width: {
 
       }
