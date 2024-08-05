@@ -1,0 +1,48 @@
+<div class="w-full h-full center-without-flex-direction">
+  <div class="w-0 h-full md:w-1/2 bg-gradient-to-br from-orange-400 to-orange-800 center-without-flex-direction">
+    <img src="/assets/img/brand.png" alt="DM Store" class="w-full">
+  </div>
+  <div class="w-full h-full center-with-flex-col-direction p-5 bg-white md:w-1/2">
+    <div class="mb-3 store-img center-without-flex-direction">
+      <img src="/assets/img/dm_store_logo_no-bg.png" alt="DM Store Logo" width="150">
+    </div>
+    <div class="login-title flex w-full justify-center">
+      <h3>Login</h3>
+    </div>
+    <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()" class="h-full w-full center-with-flex-col-direction">
+      <div class="h-36 w-full gap-y-3 flex justify-start items-center flex-col">
+        <label for="username" class="text-lg font-bold">Username</label>
+        <input type="text" name="username" formControlName="username" class="form-field w-full md:w-5/6 h-12"
+          [ngClass]="{'border-b border-red-500': formErrors.usernameField && loginFormGroup.controls.username.touched}"
+          placeholder="Username" required (blur)="validateForm()">
+        @if (formErrors.usernameField && loginFormGroup.controls.username.touched) {
+          <div class="w-full md:w-5/6">
+            <app-validation-message [fieldError]="'Username'"></app-validation-message>
+          </div>
+        }
+      </div>
+      <div class="h-36 w-full gap-y-3 flex justify-start items-center flex-col">
+        <label for="password" class="text-lg font-bold">Password</label>
+        <input type="password" name="password" formControlName="password" class="form-field w-full md:w-5/6 h-12"
+          [ngClass]="{'border-b border-red-500': formErrors.passwordField && loginFormGroup.controls.password.touched}"
+          placeholder="Password" required (blur)="validateForm()">
+        @if (formErrors.passwordField && loginFormGroup.controls.password.touched) {
+          <div class="w-full md:w-5/6">
+            <app-validation-message [fieldError]="'Password'"></app-validation-message>
+          </div>
+        }
+      </div>
+      <div class="w-full mt-10 rounded-2xl center-with-flex-col-direction">
+        @if(isLoading) {
+          <div class="w-full md:w-5/6 h-12 flex justify-center rounded-2xl">
+            <div class="loader"></div>
+          </div>
+        } @else {
+          <input type="submit" [value]="'Log In'" class="text-lg w-full md:w-5/6 h-12 rounded-2xl font-bold"
+          [ngClass]="{'bg-gray-500 text-gray-300': isInvalid, 'bg-orange-550 bg-orange text-white': !isInvalid}"
+          [disabled]="isInvalid">
+        }
+      </div>
+    </form>
+  </div>
+</div>
