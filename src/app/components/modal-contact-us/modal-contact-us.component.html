@@ -1,0 +1,71 @@
+<div class="modal-header">
+  <h4 class="modal-title">Contact Us Form</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="contactUsFormGroup" class="w-full">
+    <div class="w-full h-40 md:h-20 flex md:flex-row flex-col gap-2">
+      <div class="flex flex-col w-full justify-start items-start h-20 md:h-full">
+        <label for="firstName" class="text-xl">First Name*</label>
+        <input type="text" name="firstName" formControlName="firstName" class="w-full px-2 form-field">
+        <app-validation-message
+          *ngIf="this.contactUsFormGroup.controls.firstName.getError('required') && this.contactUsFormGroup.controls.firstName.touched"
+          [message]="'The field First Name is required!'"></app-validation-message>
+      </div>
+      <div class="flex flex-col justify-start items-start w-full h-20 md:h-full">
+        <label for="lastName" class="text-xl">Last Name*</label>
+        <input type="text" name="lastName" formControlName="lastName" class="w-full px-2 form-field">
+        <app-validation-message
+          *ngIf="this.contactUsFormGroup.controls.firstName.getError('required') && this.contactUsFormGroup.controls.lastName.touched"
+          [message]="'The field Last Name is required!'"></app-validation-message>
+      </div>
+    </div>
+    <div class="w-full h-40 md:h-20 flex md:flex-row flex-col gap-2 mt-2">
+      <div class="flex flex-col justify-start items-start w-full h-20 md:h-full">
+        <label for="email" class="text-xl">Email*</label>
+        <input type="email" name="email" formControlName="email" class="w-full px-2 form-field">
+        @if(this.contactUsFormGroup.controls.email.touched) {
+        <app-validation-message *ngIf="this.contactUsFormGroup.controls.email.getError('required')"
+          [message]="'The field Email is required!'"></app-validation-message>
+        <app-validation-message *ngIf="this.contactUsFormGroup.controls.email.getError('email')"
+          [message]="'The field Email has the wrong format'"></app-validation-message>
+        }
+      </div>
+      <div class="flex flex-col justify-start items-start w-full h-20 md:h-full">
+        <label for="phone" class="text-xl">Phone</label>
+        <input type="text" name="phone" [pattern]="phoneNumberRegex" formControlName="phone"
+          class="w-full px-2 form-field">
+        <app-validation-message
+          *ngIf="this.contactUsFormGroup.controls.phone.getError('pattern') && this.contactUsFormGroup.controls.phone.touched"
+          [message]="'The field Phone has the wrong format +000000000000'"></app-validation-message>
+      </div>
+    </div>
+    <div class="flex flex-col justify-start items-start w-full h-20 mt-2">
+      <label for="subject" class="text-xl">Subject*</label>
+      <input type="text" name="subject" formControlName="subject" class="w-full px-2 form-field">
+      <app-validation-message
+        *ngIf="this.contactUsFormGroup.controls.subject.getError('required') && this.contactUsFormGroup.controls.subject.touched"
+        [message]="'The field Subject is required!'"></app-validation-message>
+    </div>
+    <div class="flex flex-col justify-start items-start w-full h-c-25">
+      <label for="message" class="text-xl">Message*</label>
+      <textarea name="message" id="message-contact" rows="2" formControlName="message"
+        class="w-full px-2 form-field"></textarea>
+      <app-validation-message
+        *ngIf="this.contactUsFormGroup.controls.message.getError('required') && this.contactUsFormGroup.controls.message.touched"
+        [message]="'The field Message is required!'"></app-validation-message>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  @if(isLoading) {
+  <div class="w-20 h-c-9.5 flex justify-center items-center rounded-2xl">
+    <div class="loader"></div>
+  </div>
+  } @else {
+  <button type="submit" (click)="onSubmitForm()" class="px-3 h-c-9.5 rounded-md outline-none font-bold"
+    [ngClass]="{'bg-gray-500 text-gray-300': !contactUsFormGroup.valid, 'bg-orange-550 bg-orange text-white': contactUsFormGroup.valid}"
+    [disabled]="!contactUsFormGroup.valid">Send your message</button>
+  }
+  <button type="button" class="btn btn-outline-secondary" (click)="activeModal.close('Close click')">Close</button>
+</div>
