@@ -17,7 +17,7 @@
           placeholder="Username" required (blur)="validateForm()">
         @if (formErrors.usernameField && loginFormGroup.controls.username.touched) {
           <div class="w-full md:w-5/6">
-            <app-validation-message [fieldError]="'Username'"></app-validation-message>
+            <app-validation-message [message]="'The field Username is required!'"></app-validation-message>
           </div>
         }
       </div>
@@ -28,7 +28,7 @@
           placeholder="Password" required (blur)="validateForm()">
         @if (formErrors.passwordField && loginFormGroup.controls.password.touched) {
           <div class="w-full md:w-5/6">
-            <app-validation-message [fieldError]="'Password'"></app-validation-message>
+            <app-validation-message [message]="'The field Password is required!'"></app-validation-message>
           </div>
         }
       </div>

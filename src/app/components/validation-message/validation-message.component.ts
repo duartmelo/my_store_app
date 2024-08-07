@@ -8,5 +8,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './validation-message.component.scss'
 })
 export class ValidationMessageComponent {
-  @Input() fieldError: "Username" | "Password" | undefined = undefined;
+  @Input() message: string = '';
 }
