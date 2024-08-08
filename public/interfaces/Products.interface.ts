@@ -5,7 +5,7 @@ export interface ProductsResponse {
   limit: number;
 }
 
-interface Products {
+export interface Products {
   id: number;
   title: string;
   description: string;
@@ -49,4 +49,8 @@ interface ProductMeta {
   updatedAt: Date;
   barcode: string;
   qrCode: string;
+}
+
+export interface ProductCategories {
+  categories: Array<string>;
 }

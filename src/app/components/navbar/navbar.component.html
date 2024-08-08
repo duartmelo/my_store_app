@@ -1,0 +1,22 @@
+<div class="w-full h-20 flex px-3 fixed top-0 bg-gradient-to-br from-orange-400 to-orange-600 z-10">
+  <div class="w-1/5">
+    <img src="/assets/img/dm_store_logo_no-bg.png" alt="Logo" width="80">
+  </div>
+  <div class="w-5/6 md:w-3/5 h-full flex flex-row justify-center items-center">
+    <input type="search" [value]="searchInput" class="w-3/5 outline-none h-10 rounded-md px-3 accent-orange-500" (input)="OnSearchInput($event)">
+    <button *ngIf="searchInput" class="bg-orange-500 text-white rounded-full w-7 h-7 bg-center outline-none -ml-8 items-center justify-center" (click)="clearSearch()">
+      x
+    </button>
+  </div>
+  <div class="w-1/5 md:flex justify-end items-center gap-x-4 hidden">
+    <button class="text-white" [routerLink]="['/']" routerLinkActive="router-link-active">
+      HOME
+    </button>
+  </div>
+  <div class="w-1/5 h-full md:hidden flex justify-center items-center">
+    <button class="border-0 outline-none w-10 h-10">
+      <img src="/assets/icons/menu_mobile.svg" width="30" alt="Menu">
+    </button>
+  </div>
+</div>
+
