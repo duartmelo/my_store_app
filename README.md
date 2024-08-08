@@ -4,6 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Run Locally
 Have in mind to have the angular cli 18.1.0 and node version v20.15.1;
+Run the app locally with the main branch.
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
