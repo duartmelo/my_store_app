@@ -8,5 +8,9 @@ export const routes: Routes = [
   {
     path: "login",
     loadComponent: () => import("./pages/login/login.component").then(mod => mod.LoginComponent),
+  },
+  {
+    path: "products",
+    loadComponent: () => import("./pages/products/products.component").then(mod => mod.ProductsComponent),
   }
 ];

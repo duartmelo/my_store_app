@@ -1,0 +1,32 @@
+<div class="w-full flex flex-row justify-center items-center gap-x-4">
+  <div class="flex flex-row justify-start gap-x-4">
+    <div ngbDropdown>
+      <button type="button" class="text-orange-500 border border-orange-500 rounded-lg p-2" id="dropdownBasic1"
+        ngbDropdownToggle>
+        CATEGORIES
+      </button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="overflow-auto">
+        @if (categories && categories.length > 0) {
+        @for (category of categories; track $index) {
+        <button ngbDropdownItem [ngClass]="{'text-white !bg-orange-500': categoryActive === category}"
+          class="active:bg-orange-550 text-white" (click)="OnCategorySelect(category)">{{category}}</button>
+        }
+        }
+      </div>
+    </div>
+
+    <div ngbDropdown>
+      <button type="button" class="text-orange-500 border border-orange-500 rounded-lg p-2" id="dropdownBasic2"
+        ngbDropdownToggle>
+        SORT
+      </button>
+
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+        @for(sort of sortOptions; track $index) {
+        <button ngbDropdownItem [ngClass]="{'text-white !bg-orange-500': sortActive === sort}"
+          class="active:bg-orange-550 text-white" (click)="OnSelectSort(sort)">{{sort}}</button>
+        }
+      </div>
+    </div>
+  </div>
+</div>

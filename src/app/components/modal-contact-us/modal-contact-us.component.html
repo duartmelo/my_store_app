@@ -64,7 +64,7 @@
   </div>
   } @else {
   <button type="submit" (click)="onSubmitForm()" class="px-3 h-c-9.5 rounded-md outline-none font-bold"
-    [ngClass]="{'bg-gray-500 text-gray-300': !contactUsFormGroup.valid, 'bg-orange-550 bg-orange text-white': contactUsFormGroup.valid}"
+    [ngClass]="{'bg-gray-500 text-gray-300': !contactUsFormGroup.valid, 'bg-orange-550 text-white': contactUsFormGroup.valid}"
     [disabled]="!contactUsFormGroup.valid">Send your message</button>
   }
   <button type="button" class="btn btn-outline-secondary" (click)="activeModal.close('Close click')">Close</button>
