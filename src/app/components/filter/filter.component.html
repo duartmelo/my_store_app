@@ -9,7 +9,8 @@
         @if (categories && categories.length > 0) {
         @for (category of categories; track $index) {
         <button ngbDropdownItem [ngClass]="{'text-white !bg-orange-500': categoryActive === category}"
-          class="active:bg-orange-550 text-white" (click)="OnCategorySelect(category)">{{category}}</button>
+          class="active:bg-orange-550 text-white" (click)="OnCategorySelect(category)">{{category | titlecase
+          }}</button>
         }
         }
       </div>
@@ -28,5 +29,10 @@
         }
       </div>
     </div>
+    <button class="p-2 rounded-lg" (click)="clearFilters()"
+      [disabled]="!sortActive && !categoryActive"
+      [ngClass]="{'bg-gray-500 text-gray-300': !sortActive || !categoryActive, 'bg-orange-550 text-white': sortActive || categoryActive}">
+      Clear Filters
+    </button>
   </div>
 </div>

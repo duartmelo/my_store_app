@@ -38,7 +38,6 @@ export class ModalContactUsComponent implements OnDestroy {
   constructor(private formContactService: FormContactService, private notificationService: NotificationService) {}
 
   onSubmitForm() {
-    console.log(this.contactUsFormGroup.valid);
     if(this.contactUsFormGroup.valid && !this.isLoading) {
       this.isLoading = true;
       this.formSubmitSubscription = this.formContactService.sendContactFormData(this.contactUsFormGroup.value as ContactUsFormData).subscribe({

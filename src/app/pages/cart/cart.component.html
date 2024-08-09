@@ -1,0 +1,44 @@
+<div class="w-full h-full flex flex-col p-4 md:!px-32 xl:!px-48 2xl:!px-72 md:py-10 gap-4">
+  <div>
+    <button class="text-orange-500 flex gap-x-2 items-center" [routerLink]="['/products']">
+      <img src="/assets/icons/previous.png" alt="previous" width="10"> Back to Products
+    </button>
+  </div>
+  @if (cartProduts.length > 0) {
+  <div class="w-full flex flex-col">
+    <table>
+      <tbody class="text-center">
+        @for (productInCart of cartProduts; track productInCart) {
+        <tr>
+          <td class="w-20">
+            <img [src]="productInCart.product.thumbnail" [alt]="productInCart.product.title" width="100">
+          </td>
+          <td class="text-left text-sm w-24">
+            {{productInCart.product.title}}
+          </td>
+          <td class="w-10 text-center">
+            {{productInCart.quantity}}
+          </td>
+          <td class="w-10 text-center">
+            {{productInCart.product.price | currency : '2.2-2' : '€'}}
+          </td>
+          <td class="w-10">
+            {{productInCart.product.price * productInCart.quantity | currency : '2.2-2' : '€'}}
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    <div class="w-full flex justify-center items-center">
+      <h3 class="mt-6">TOTAL: {{totalCart | currency : '2.2-2' : '€'}}</h3>
+    </div>
+  </div>
+  <div class="w-full h-full flex">
+    <button class="mt-auto w-full h-20 bg-orange-500 text-white rounded-lg" routerLink="/checkout">Checkout</button>
+  </div>
+  } @else {
+    <div class="w-full h-full flex justify-center items-center text-xl">
+      Nothing here to checkout!
+    </div>
+  }
+</div>

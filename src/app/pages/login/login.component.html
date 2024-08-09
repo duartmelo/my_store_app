@@ -9,7 +9,7 @@
     <div class="login-title flex w-full justify-center">
       <h3>Login</h3>
     </div>
-    <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()" class="h-full w-full center-with-flex-col-direction">
+    <form [formGroup]="loginFormGroup" class="h-full w-full center-with-flex-col-direction">
       <div class="h-36 w-full gap-y-3 flex justify-start items-center flex-col">
         <label for="username" class="text-lg font-bold">Username</label>
         <input type="text" name="username" formControlName="username" class="form-field w-full md:w-5/6 h-12"
@@ -23,9 +23,14 @@
       </div>
       <div class="h-36 w-full gap-y-3 flex justify-start items-center flex-col">
         <label for="password" class="text-lg font-bold">Password</label>
-        <input type="password" name="password" formControlName="password" class="form-field w-full md:w-5/6 h-12"
+        <div class="w-full flex justify-center">
+          <input [type]="showPassword ? 'text' : 'password'" name="password" formControlName="password" class="form-field w-full md:w-5/6 h-12"
           [ngClass]="{'border-b border-red-500': formErrors.passwordField && loginFormGroup.controls.password.touched}"
           placeholder="Password" required (blur)="validateForm()">
+          <button (click)="tooglePassword()" class="-ml-6">
+            <img [src]="showPassword ? '/assets/icons/eye-outline.svg' : '/assets/icons/eye-password-hide.svg'" width="25" alt="Password button eye">
+          </button>
+        </div>
         @if (formErrors.passwordField && loginFormGroup.controls.password.touched) {
           <div class="w-full md:w-5/6">
             <app-validation-message [message]="'The field Password is required!'"></app-validation-message>
@@ -38,7 +43,7 @@
             <div class="loader"></div>
           </div>
         } @else {
-          <input type="submit" [value]="'Log In'" class="text-lg w-full md:w-5/6 h-12 rounded-2xl font-bold"
+          <input type="submit" (click)="onSubmit()" [value]="'Log In'" class="text-lg w-full md:w-5/6 h-12 rounded-2xl font-bold"
           [ngClass]="{'bg-gray-500 text-gray-300': isInvalid, 'bg-orange-550 bg-orange text-white': !isInvalid}"
           [disabled]="isInvalid">
         }

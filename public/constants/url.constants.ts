@@ -2,6 +2,7 @@ export const DOMAIN = "https://dummyjson.com";
 
 //Login
 export const LOGIN = "/auth/login";
+export const GET_USER = "/users/"
 
 //Products
 export const ALL_PRODUCTS = "/products";
