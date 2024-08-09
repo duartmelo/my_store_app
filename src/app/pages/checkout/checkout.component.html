@@ -1,0 +1,84 @@
+<div class="w-full h-full flex flex-col sm:justify-center items-center py-6 px-10 md:px-24">
+  <h2 class="text-center">We are preparing your checkout. Please, fill and confirm your data. Thank you</h2>
+  <div class="w-full flex flex-col justify-center items-center mt-6">
+    <div class="w-full flex flex-col md:flex-row justify-center items-center gap-x-6 gap-y-6s">
+      <div class="w-96 h-full">
+        <div class="w-full h-full flex flex-col justify-center items-center">
+          Total of your package is <br />
+          <span class="text-3xl text-orange-500">
+            {{totalCart | currency : '2.2-2' : '€'}}
+          </span>
+        </div>
+      </div>
+      <form [formGroup]="userDataFormGroup" class="w-full">
+        <div class="w-full h-40 md:h-20 flex md:flex-row flex-col gap-2">
+          <div class="flex flex-col w-full justify-start items-start h-20 md:h-full">
+            <label for="firstName" class="text-xl">First Name*</label>
+            <input placeholder="First Name" type="text" name="firstName" formControlName="firstName"
+              class="w-full px-2 form-field">
+            <app-validation-message
+              *ngIf="this.userDataFormGroup.controls.firstName.getError('required') && this.userDataFormGroup.controls.firstName.touched"
+              [message]="'The field First Name is required!'"></app-validation-message>
+          </div>
+          <div class="flex flex-col justify-start items-start w-full h-20 md:h-full">
+            <label for="lastName" class="text-xl">Last Name*</label>
+            <input placeholder="Last Name" type="text" name="lastName" formControlName="lastName"
+              class="w-full px-2 form-field">
+            <app-validation-message
+              *ngIf="this.userDataFormGroup.controls.lastName.getError('required') && this.userDataFormGroup.controls.lastName.touched"
+              [message]="'The field Last Name is required!'"></app-validation-message>
+          </div>
+        </div>
+        <div class="w-full h-40 md:h-20 flex md:flex-row flex-col gap-2 mt-2">
+          <div class="flex flex-col justify-start items-start w-full h-20 md:h-full">
+            <label for="email" class="text-xl">Email*</label>
+            <input placeholder="Email" type="email" name="email" formControlName="email" class="w-full px-2 form-field">
+            @if(this.userDataFormGroup.controls.email.touched) {
+            <app-validation-message *ngIf="this.userDataFormGroup.controls.email.getError('required')"
+              [message]="'The field Email is required!'"></app-validation-message>
+            <app-validation-message *ngIf="this.userDataFormGroup.controls.email.getError('email')"
+              [message]="'The field Email has the wrong format'"></app-validation-message>
+            }
+          </div>
+          <div class="flex flex-col justify-start items-start w-full h-20 md:h-full">
+            <label for="phone" class="text-xl">Phone</label>
+            <input placeholder="Phone" type="text" name="phone" formControlName="phone" class="w-full px-2 form-field">
+            <app-validation-message
+              *ngIf="this.userDataFormGroup.controls.phone.getError('pattern') && this.userDataFormGroup.controls.phone.touched"
+              [message]="'The field Phone has the wrong format +000000000000'"></app-validation-message>
+          </div>
+        </div>
+        <div class="flex flex-col justify-start items-start w-full h-20 mt-2">
+          <label for="address" class="text-xl">Address*</label>
+          <input placeholder="Address" type="text" name="address" formControlName="address"
+            class="w-full px-2 form-field">
+          <app-validation-message
+            *ngIf="this.userDataFormGroup.controls.address.getError('required') && this.userDataFormGroup.controls.address.touched"
+            [message]="'The field address is required!'"></app-validation-message>
+        </div>
+        <div class="w-full h-40 md:h-20 flex md:flex-row flex-col gap-2">
+
+          <div class="flex flex-col justify-start items-start w-full h-c-25">
+            <label for="city" class="text-xl">City*</label>
+            <input placeholder="City" type="text" name="city" formControlName="city" class="w-full px-2 form-field">
+            <app-validation-message
+              *ngIf="this.userDataFormGroup.controls.city.getError('required') && this.userDataFormGroup.controls.city.touched"
+              [message]="'The field city is required!'"></app-validation-message>
+          </div>
+          <div class="flex flex-col justify-start items-start w-full h-c-25">
+            <label for="postal-code" class="text-xl">Postal-Code*</label>
+            <input placeholder="Postal-Code" type="text" name="postal-code" formControlName="postalCode"
+              class="w-full px-2 form-field">
+            <app-validation-message
+              *ngIf="this.userDataFormGroup.controls.postalCode.getError('required') && this.userDataFormGroup.controls.postalCode.touched"
+              [message]="'The field Postal-Codes is required!'"></app-validation-message>
+          </div>
+        </div>
+        <button type="submit" (click)="finishBuy()"
+          class="px-3 h-c-9.5 rounded-md outline-none font-bold w-full md:w-fit"
+          [ngClass]="{'bg-gray-500 text-gray-300': !userDataFormGroup.valid, 'bg-orange-550 text-white': userDataFormGroup.valid}"
+          [disabled]="!userDataFormGroup.valid">I Confirmed my Data</button>
+      </form>
+    </div>
+  </div>
+</div>

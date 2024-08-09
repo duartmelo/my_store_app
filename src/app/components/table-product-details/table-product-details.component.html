@@ -1,0 +1,76 @@
+@if (product) {
+  <table class="w-full mt-10">
+    <tbody class="text-xl">
+      <tr>
+        <td>
+          Price:
+        </td>
+        <td class="text-right">
+          <strong class="text-orange-500 text-2xl">
+            {{product.price | currency : '2.2-2' : '€'}}
+          </strong>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Discount:
+        </td>
+        <td class="text-right">
+          <strong class="text-orange-500 text-right">
+            {{product.discountPercentage}} %
+          </strong>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Availability:
+        </td>
+        <td class="text-right">
+          <strong class="text-orange-500 text-right">
+            {{product.availabilityStatus}}
+          </strong>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Warranty:
+        </td>
+        <td class="text-right">
+          <strong class="text-orange-500 text-right">
+            {{product.warrantyInformation}}
+          </strong>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Minimum Order Quantity:
+        </td>
+        <td class="text-right">
+          <strong class="text-orange-500 text-right">
+            {{product.minimumOrderQuantity}}
+          </strong>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Rating
+        </td>
+        <td class="text-right">
+          <strong class="text-orange-500 text-right">
+            <ngb-rating [(rate)]="product.rating" [readonly]="true" [max]="5" />
+          </strong>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Return Policy
+        </td>
+        <td class="text-right">
+          <strong class="text-orange-500 text-right">
+            {{product.returnPolicy}}
+          </strong>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+}

@@ -7,6 +7,7 @@ import { ProductInfoComponent } from '@components/product-info/product-info.comp
 import { HttpParams } from '@angular/common/http';
 import { FilterComponent } from "../../components/filter/filter.component";
 import { NgClass } from '@angular/common';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -34,11 +35,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
     fromObject: {
       skip: this.skip,
       limit: this.limit,
-      search: ""
+      q: "",
     }
   })
 
-  constructor(private productsService: ProductsService) { }
+  constructor(private productsService: ProductsService, private router: Router) { }
 
   ngOnInit() {
     this.getCategories();
@@ -122,6 +123,16 @@ export class ProductsComponent implements OnInit, OnDestroy {
     } else {
       this.getProducts();
     }
+  }
+
+  navigateToDetails(id: number) {
+    this.router.navigateByUrl('/product-details/'+ id);
+  }
+
+  clearFilters() {
+    this.category = "";
+    this.params = this.params.delete('sortBy');
+    this.getProducts();
   }
 
   ngOnDestroy() {

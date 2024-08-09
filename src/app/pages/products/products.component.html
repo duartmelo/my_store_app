@@ -1,10 +1,10 @@
 <div class="w-full h-20">
-  <app-navbar (searchEmmiter)="addParams('search',$event)"></app-navbar>
+  <app-navbar (searchEmmiter)="addParams('q',$event)"></app-navbar>
 </div>
 @if(!hasError) {
   <div class="w-full h-10 flex flex-row justify-center items-center gap-2 my-2" [ngClass]="{'hidden': isLoading}">
     <app-filter class="w-full h-full" [categories]="productCategories" (categoryEmitter)="filterByCategory($event)"
-    (sortEmitter)="addParams('sortBy',$event)"></app-filter>
+    (sortEmitter)="addParams('sortBy',$event)" (clearEmitter)="clearFilters()"></app-filter>
   </div>
   @if(isLoading) {
     <div class="w-full h-full bg-white absolute z-50">
@@ -17,13 +17,15 @@
       <div class="flex flex-col h-full justify-center items-center">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 h-full lg:px-40 gap-2">
           @for(product of products; track product) {
-            <app-product-info [product]="product"></app-product-info>
+            <button (click)="navigateToDetails(product.id)">
+              <app-product-info [product]="product"></app-product-info>
+            </button>
           }
         </div>
       </div>
     </div>
     <div class="flex justify-center items-start w-full my-4">
-      <button class="w-36 h-10 bg-orange-550 text-white rounded-lg" (click)="loadMore()" [disabled]="!hasMoreToLoad">Load More</button>
+      <button class="w-36 h-10 rounded-lg" [ngClass]="{'bg-gray-500 text-gray-300': !hasMoreToLoad, 'bg-orange-550 text-white': hasMoreToLoad}" (click)="loadMore()" [disabled]="!hasMoreToLoad">Load More</button>
     </div>
   }
 } @else {

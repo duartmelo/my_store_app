@@ -7,14 +7,14 @@
     <div class="w-full h-40 md:h-20 flex md:flex-row flex-col gap-2">
       <div class="flex flex-col w-full justify-start items-start h-20 md:h-full">
         <label for="firstName" class="text-xl">First Name*</label>
-        <input type="text" name="firstName" formControlName="firstName" class="w-full px-2 form-field">
+        <input placeholder="First Name" type="text" name="firstName" formControlName="firstName" class="w-full px-2 form-field">
         <app-validation-message
           *ngIf="this.contactUsFormGroup.controls.firstName.getError('required') && this.contactUsFormGroup.controls.firstName.touched"
           [message]="'The field First Name is required!'"></app-validation-message>
       </div>
       <div class="flex flex-col justify-start items-start w-full h-20 md:h-full">
         <label for="lastName" class="text-xl">Last Name*</label>
-        <input type="text" name="lastName" formControlName="lastName" class="w-full px-2 form-field">
+        <input placeholder="Last Name" type="text" name="lastName" formControlName="lastName" class="w-full px-2 form-field">
         <app-validation-message
           *ngIf="this.contactUsFormGroup.controls.firstName.getError('required') && this.contactUsFormGroup.controls.lastName.touched"
           [message]="'The field Last Name is required!'"></app-validation-message>
@@ -23,7 +23,7 @@
     <div class="w-full h-40 md:h-20 flex md:flex-row flex-col gap-2 mt-2">
       <div class="flex flex-col justify-start items-start w-full h-20 md:h-full">
         <label for="email" class="text-xl">Email*</label>
-        <input type="email" name="email" formControlName="email" class="w-full px-2 form-field">
+        <input placeholder="Email" type="email" name="email" formControlName="email" class="w-full px-2 form-field">
         @if(this.contactUsFormGroup.controls.email.touched) {
         <app-validation-message *ngIf="this.contactUsFormGroup.controls.email.getError('required')"
           [message]="'The field Email is required!'"></app-validation-message>
@@ -33,7 +33,7 @@
       </div>
       <div class="flex flex-col justify-start items-start w-full h-20 md:h-full">
         <label for="phone" class="text-xl">Phone</label>
-        <input type="text" name="phone" [pattern]="phoneNumberRegex" formControlName="phone"
+        <input placeholder="Phone" type="text" name="phone" [pattern]="phoneNumberRegex" formControlName="phone"
           class="w-full px-2 form-field">
         <app-validation-message
           *ngIf="this.contactUsFormGroup.controls.phone.getError('pattern') && this.contactUsFormGroup.controls.phone.touched"
@@ -42,14 +42,14 @@
     </div>
     <div class="flex flex-col justify-start items-start w-full h-20 mt-2">
       <label for="subject" class="text-xl">Subject*</label>
-      <input type="text" name="subject" formControlName="subject" class="w-full px-2 form-field">
+      <input placeholder="Suject of your message" type="text" name="subject" formControlName="subject" class="w-full px-2 form-field">
       <app-validation-message
         *ngIf="this.contactUsFormGroup.controls.subject.getError('required') && this.contactUsFormGroup.controls.subject.touched"
         [message]="'The field Subject is required!'"></app-validation-message>
     </div>
     <div class="flex flex-col justify-start items-start w-full h-c-25">
       <label for="message" class="text-xl">Message*</label>
-      <textarea name="message" id="message-contact" rows="2" formControlName="message"
+      <textarea placeholder="Message" name="message" id="message-contact" rows="2" formControlName="message"
         class="w-full px-2 form-field"></textarea>
       <app-validation-message
         *ngIf="this.contactUsFormGroup.controls.message.getError('required') && this.contactUsFormGroup.controls.message.touched"

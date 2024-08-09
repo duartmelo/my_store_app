@@ -1,6 +1,6 @@
 import { NgClass } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ValidationMessageComponent } from '@components/index';
@@ -19,13 +19,14 @@ import { NotificationService } from 'services/notification/notification.service'
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent implements OnDestroy {
+export class LoginComponent implements OnInit, OnDestroy {
   isInvalid = true;
   isLoading = false;
   formErrors = {
     usernameField: false,
     passwordField: false
   }
+  showPassword = false;
   loginFormGroup = new FormGroup({
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required])
@@ -37,6 +38,26 @@ export class LoginComponent implements OnDestroy {
     private authentication: AuthenticationService,
     private router: Router,
     private notificationService: NotificationService) {}
+
+  ngOnInit() {
+    const isAuthenticated = localStorage.getItem("auth") === "true";
+
+    if (isAuthenticated) {
+
+      this.notificationService.setNotification({
+        type: NotificationType.SUCCESS,
+        message: "You are already logged In",
+        class: "bg-green-500 " + this.commonClasses,
+        title: "",
+      });
+
+      this.router.navigateByUrl("/products")
+    }
+  }
+
+  tooglePassword() {
+    this.showPassword = !this.showPassword;
+  }
 
   validateForm() {
     this.formErrors.usernameField = this.loginFormGroup.controls.username.getError("required");
@@ -61,8 +82,8 @@ export class LoginComponent implements OnDestroy {
     }
 
     this.notificationService.setNotification(notification);
-
-    this.router.navigate(["/"]);
+    localStorage.setItem("auth", "true");
+    this.router.navigate(["/checkout"]);
   }
 
   loginFail(error: HttpErrorResponse) {
@@ -81,7 +102,10 @@ export class LoginComponent implements OnDestroy {
     if(credentials.username && credentials.password) {
       this.isLoading=true
       this.loginSubscription = this.authentication.login(credentials).pipe(shareReplay(), finalize(()=>this.isLoading = false)).subscribe({
-        next: () => this.loginSuccessfull(),
+        next: response => {
+          this.authentication.setUserId(response.id);
+          this.loginSuccessfull();
+        },
         error: error => this.loginFail(error),
       })
     }

@@ -1,11 +1,11 @@
-import { NgClass } from '@angular/common';
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { NgbActiveModal, NgbDropdownModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule, NgClass } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { NgbDropdownModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-filter',
   standalone: true,
-  imports: [NgClass, NgbDropdownModule, NgbModalModule],
+  imports: [NgClass, NgbDropdownModule, NgbModalModule, CommonModule],
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.scss'
 })
@@ -13,6 +13,7 @@ export class FilterComponent {
   @Input() categories: Array<string> = [];
   @Output() categoryEmitter: EventEmitter<string> = new EventEmitter<string>();
   @Output() sortEmitter: EventEmitter<string> = new EventEmitter<string>();
+  @Output() clearEmitter: EventEmitter<unknown> = new EventEmitter();
 
   sortOptions: Array<string> = ["Title", "Price", "Discount", "Rating"]
   sortActive: string = '';
@@ -42,6 +43,12 @@ export class FilterComponent {
     } else {
       this.sortActive = sort;
     }
+  }
+
+  clearFilters() {
+    this.categoryActive = "";
+    this.sortActive = "";
+    this.clearEmitter.emit();
   }
 
 }

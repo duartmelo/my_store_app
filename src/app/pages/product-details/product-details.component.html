@@ -1,0 +1,63 @@
+<div class="w-full h-full p-4 md:!px-32 xl:!px-48 2xl:!px-72 md:py-10 gap-4">
+  <div>
+    <button class="text-orange-500 flex gap-x-2 items-center" [routerLink]="['/products']">
+      <img src="/assets/icons/previous.png" alt="previous" width="10"> Back to Products
+    </button>
+  </div>
+  @if (product) {
+  <div class="w-full flex mt-5">
+    <h2 class="text-orange-500">
+      {{product.title}}
+    </h2>
+  </div>
+  <div class="w-full flex md:flex-row flex-col md:gap-6">
+    <div class="w-full flex justify-center items-center">
+      <ngb-carousel>
+        @for (image of product.images; track image) {
+        {{image | json}}
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img [src]="image" [alt]="product.title" />
+          </div>
+          <div class="carousel-caption">
+          </div>
+        </ng-template>
+        }
+      </ngb-carousel>
+
+    </div>
+    <div class="w-full flex flex-col justify-center items-center md:ml-10 my-4">
+      <div class="text-3xl">
+        {{product.description}}
+      </div>
+      <div class="w-full flex flex-col mt-5 gap-y-4">
+        <input type="text" name="quantity" id="quantity" placeholder="Quantity" class="w-full h-20 px-4 outline-none rounded-lg border" [(ngModel)]="quantity">
+        @if(hasError) {
+          <app-validation-message [message]="'Quantity has to be one or more'"></app-validation-message>
+        }
+        <button class="w-full h-20 text-white bg-orange-600 rounded-lg flex items-center justify-center"
+          (click)="addToCart(product)"
+          [ngClass]="{'bg-gray-500 text-gray-300': product.availabilityStatus === 'Out of Stock', 'text-white bg-orange-600': product.availabilityStatus !== 'Out of Stock'}"
+          [disabled]="product.availabilityStatus === 'Out of Stock'"
+          >
+          ADD TO CART
+        </button>
+      </div>
+      <app-table-product-details class="w-full flex" [product]="product"></app-table-product-details>
+    </div>
+  </div>
+  <div class="flex flex-col w-full justify-center md:justify-end md:px-5">
+    <h3 class>Reviews</h3>
+    <hr class="bg-slate-400">
+      @for (review of product.reviews; track review) {
+        <h6>{{review.date | date : 'dd/MM/YYYY hh:mm'}}</h6>
+        <div class="flex flex-row">
+          <h4>{{review.reviewerName}}</h4>
+          <ngb-rating class="ml-auto" [(rate)]="review.rating" [readonly]="true" [max]="5" />
+        </div>
+        <p>{{review.comment}}</p>
+        <hr class="bg-slate-400">
+      }
+  </div>
+  }
+</div>
