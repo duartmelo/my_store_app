@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private notificationService: NotificationService) {}
 
   ngOnInit() {
-    const isAuthenticated = localStorage.getItem("auth") === "true";
+    const isAuthenticated = sessionStorage.getItem("auth") === "true";
 
     if (isAuthenticated) {
 
@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     this.notificationService.setNotification(notification);
-    localStorage.setItem("auth", "true");
+    sessionStorage.setItem("auth", "true");
     this.router.navigate(["/checkout"]);
   }
 
