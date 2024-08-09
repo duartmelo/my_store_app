@@ -21,10 +21,10 @@ export class AuthenticationService {
   }
 
   getUserId() {
-    return localStorage.getItem('userId');
+    return sessionStorage.getItem('userId');
   }
 
   setUserId(id: number) {
-    localStorage.setItem('userId', id.toString());
+    sessionStorage.setItem('userId', id.toString());
   }
 }
